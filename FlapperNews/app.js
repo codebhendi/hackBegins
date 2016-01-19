@@ -10,8 +10,7 @@ app.controller('MainCtrl', [
 			if ( !$scope.title || $scope.title === "" ) {
 				return;
 			}
-			console.log("dlfl");
-
+			
 			$scope.posts.push({
 				title: $scope.title,
 				upvotes: 0,
@@ -59,5 +58,28 @@ app.config(['$stateProvider',
 		controller: 'PostsCtrl'
 	});
 
-
 ]);	
+
+app.controller('PostsCtrl', [
+	'$scope',
+	'posts',
+	'$stateParams'
+	function ( $stateParams, posts, $scope ) {
+		$scope.post = posts.posts[$stateParams.id];
+
+		
+		$scope.addComment = function() {
+			if ( $scope.body === '') {
+				return ;
+			}
+
+			$scope.post.comments.push({
+				body: $scope.body,
+				upvotes: 0,
+				author: 'user'
+			});
+
+			$scope.body = '';
+		};
+	};
+]);

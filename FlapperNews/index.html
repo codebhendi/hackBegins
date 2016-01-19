@@ -9,6 +9,45 @@
 		<div class="news-header">
 			<h1>Flapper News</h1>
 		</div>
+		<span>
+			<a href="#/posts.html/{{$index}}">
+			Comments
+			</a>
+		</span>
+	</script>
+	<script type="text/ng-template" id="/posts.html">
+		<div class="post-body">
+			<h3>
+				<a href="{{post.link}}" ng-show="post.link">
+					{{post.title}}
+				</a>
+				<span ng-hide="post.link">
+					{{post.title}}
+				</span>
+			</h3>
+		</div>
+
+		<div ng-repeat="comment from comments | orderBy: '-upvotes'">
+			<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)">
+			</span>
+			{{comment.upvotes}} - {{comment.author}}
+			<div>
+				{{comment.body}}
+			</div>
+		</div>
+
+		<form ng-submit="addComment()">
+			<h3>Add a new comment</h3>
+			<div class="form-group">
+				<label>
+					Comment :
+				</label>
+				<input class="form-control" type="text" ng-model="body" placeholder="comment">
+			</div>
+			<button type="submit">
+				submit
+			</button>
+		</form>
 	</script>
 	<style type="text/css">
 		body {

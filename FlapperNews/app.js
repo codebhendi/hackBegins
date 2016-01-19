@@ -1,18 +1,10 @@
-var app = angular.module('flapperNews', []);
+var app = angular.module('flapperNews', ['ui.router']);
 
 app.controller('MainCtrl', [
 	'$scope',
 	'posts',
 	function($scope, posts) {
 		$scope.posts = posts.posts;
-
-		[
-			{title: 'post 1', upvotes:1},
-			{title: 'post 2', upvotes:2},
-			{title: 'post 3', upvotes:3},
-			{title: 'post 4', upvotes:4},
-			{title: 'post 5', upvotes:5}
-		];
 
 		$scope.addpost = function() {
 			if ( !$scope.title || $scope.title === "" ) {
@@ -23,7 +15,11 @@ app.controller('MainCtrl', [
 			$scope.posts.push({
 				title: $scope.title,
 				upvotes: 0,
-				link: $scope.link
+				link: $scope.link,
+				comments: [
+				{author: 'bhendi', body: 'mast chutiyap!!', upvotes: 0},
+				{author: 'bhendu', body: 'kya bakchodi hai', upvotes: 0}
+				]
 			});
 
 			$scope.title = "";
@@ -43,3 +39,25 @@ app.factory('posts', [function() {
 
 	return 0;
 }]);
+
+app.config(['$stateProvider',
+	'$urlRouteProvider',
+	function ($stateProvider, $urlRouteProvider) {
+		$stateProvider
+			.state('home'{
+				url: '/home',
+				templateUrl: '/home.html',
+				controller: 'MainCtrl'
+			});
+
+		$urlRouteProvider.otherwise('home');
+	}
+
+	.state('posts'{
+		url: '/posts/{id}',
+		templateUrl: '/posts.html',
+		controller: 'PostsCtrl'
+	});
+
+
+]);	

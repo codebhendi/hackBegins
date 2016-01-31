@@ -12,4 +12,9 @@ commentSchema.methods.upvote = function ( cb ) {
 	this.save( cb );
 };
 
+commentSchema.methods.upvote = function ( cb ) {
+	this.upvotes--;
+	this.save( cb );
+};
+
 mongoose.model('Comment', commentSchema);

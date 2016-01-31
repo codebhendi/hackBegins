@@ -73,7 +73,15 @@ router.put( '/posts/:post/upvote', auth, function ( req, res, next ) {
 		if ( err ) {
 			return next( err);
 		}
-		//console.log(req);
+		res.json( post );	
+	} );
+} );
+
+router.put( '/posts/:post/downvote', auth, function ( req, res, next ) {
+	req.post.downvote( function ( err, post ) {
+		if ( err ) {
+			return next( err);
+		}
 		res.json( post );	
 	} );
 } );
@@ -119,6 +127,15 @@ router.param( 'comment', function ( req, res, next, id ) {
 
 router.put( '/posts/:post/comments/:comment/upvote', auth, function ( req, res, next ) {
 	req.comment.upvote( function( err, comment ) {
+		if ( err ) {
+			return next( err );
+		}
+		res.json( comment );
+	} );
+} );
+
+router.put( '/posts/:post/comments/:comment/downvote', auth, function ( req, res, next ) {
+	req.comment.downvote( function( err, comment ) {
 		if ( err ) {
 			return next( err );
 		}

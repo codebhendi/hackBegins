@@ -12,7 +12,7 @@ To run you must have MongoDB, node and npm.
 * npm start
 
 #shittyChatClient
-## It is a chat client written in node.
-## It is really basic. It only requires you to have node.js nad telnet or something which can create a virtual internet connection.
-## I learned this from a demo given by Ryan Dahl(creator of node.js).
-## The link is https://www.youtube.com/watch?v=jo_B4LTHi3I
+* It is a chat client written in node.
+* It is really basic. It only requires you to have node.js nad telnet or something which can create a virtual internet connection.
+* I learned this from a demo given by Ryan Dahl(creator of node.js).
+* The link is https://www.youtube.com/watch?v=jo_B4LTHi3I

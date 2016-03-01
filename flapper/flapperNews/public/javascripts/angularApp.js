@@ -1,4 +1,4 @@
-	var app = angular.module( 'flapperNews', ['ui.router'] );
+var app = angular.module( 'flapperNews', ['ui.router'] );
 
 app.config( [
 	'$stateProvider',
@@ -12,7 +12,7 @@ app.config( [
 				controller: 'PostsCtrl',
 				resolve: {
 					post: ['$stateParams', 'posts', function ( $stateParams, posts ) {
-						return posts.get($stateParams.id);
+						return posts.get( $stateParams.id );
 					}]
 				}
 			} )
@@ -108,7 +108,7 @@ app.factory( 'posts', ['$http', 'auth', function ( $http, auth ) {
 		} );
 	}
 
-	o.upvoteComment = function ( post, comment ) {
+	o.downvoteComment = function ( post, comment ) {
 		return $http.put( '/posts/' + post._id + '/comments/' + comment._id + '/downvote', null, {
 			headers: {Authorization: 'Bearer ' + auth.getToken()}
 		} ).success( function ( data ) {
@@ -133,7 +133,6 @@ app.factory( 'posts', ['$http', 'auth', function ( $http, auth ) {
 
 	auth.isLoggedIn = function () {
 		var token = auth.getToken();
-		console.log( token == null );
 
 		if ( token ) {
 			var payload = JSON.parse( $window.atob( token.split( '.' )[1] ) );
@@ -155,6 +154,7 @@ app.factory( 'posts', ['$http', 'auth', function ( $http, auth ) {
 
 	auth.register = function ( user ) {
 		return $http.post( '/register', user ).success( function( data) {
+			//console.log(data);
 			auth.saveToken( data.token );
 		} );
 	};
@@ -166,6 +166,7 @@ app.factory( 'posts', ['$http', 'auth', function ( $http, auth ) {
 	};
 
 	auth.logOut = function () {
+		console.log(1);
 		$window.localStorage.removeItem( 'flapper-news-token' );
 	};
 

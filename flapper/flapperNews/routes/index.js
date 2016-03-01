@@ -147,17 +147,18 @@ router.post( '/register', function ( req, res, next ) {
 	if ( !req.body.username || !req.body.password ) {
 		return res.status( 400 ).json( {message: "Please fill out all fields"});
 	}
-
-	var user = new User();
 	
-	user.username = req.body.username;
-	user.setPassword( req.body.password );
-	user.save( function( err ) {
+	passport.authenticate( 'local-signup', function ( err, user, info ) {
 		if ( err ) {
-			return next( err );
+			next( err );
 		}
+		if ( !user ) {
+			return res.status( 400 ).json( {message: "Username already exists"});
+		}
+
 		return res.json( {token: user.generateJWT()} );
-	} )
+	} )( req, res, next );
+
 } );
 
 

@@ -10,7 +10,7 @@ To run you must have MongoDB, node and npm.
 * enter the direectory flapperNews
 * use npm install, to install all the necessary packages to run this app.
 * npm start
-* This is tutorial was good for basics but bad for doing anything beyond it. For getting some good knowledge on passport got to this (https://scotch.io/tutorials/easy-node-authentication-setup-and-local)[link]
+* This is tutorial was good for basics but bad for doing anything beyond it. For getting some good knowledge on passport got to this [link](https://scotch.io/tutorials/easy-node-authentication-setup-and-local)
 
 #shittyChatClient
 * It is a chat client written in node.

@@ -23,7 +23,7 @@ passport.use( 'local', new localStrategy(
 	}
 ) );
 
-passport.use('local-signup', new localStrategy(
+passport.use( 'local-signup', new localStrategy(
     function( username, password, done ) {
 
         // asynchronous
@@ -32,15 +32,15 @@ passport.use('local-signup', new localStrategy(
 
 	        // find a user whose email is the same as the forms email
 	        // we are checking to see if the user trying to login already exists
-	        User.findOne({ 'username' :  username }, function(err, user) {
+	        User.findOne( { 'username' :  username }, function( err, user ) {
 	            // if there are any errors, return the error
-	            if (err)
-	                return done(err);
+	            if ( err )
+	                return done( err );
 
 	            // check to see if theres already a user with that email
-	            if (user) {
-	                return done(null, false, {message: 'That username'+ 
-	                	'is already taken.'});
+	            if ( user ) {
+	                return done( null, false, {message: 'That username'+ 
+	                	'is already taken.'} );
 	            } else {
 
 	                // if there is no user with that email
@@ -52,16 +52,17 @@ passport.use('local-signup', new localStrategy(
 	                user.setPassword( password );
 
 	                // save the user
-	                user.save(function(err) {
-	                    if (err) {
+	                user.save( function( err ) {
+	                    if ( err ) {
 	                        throw err;
 	                    }
-	                    return done(null, user);
-	                });
+	                    return done( null, user );
+	                } );
 	            }
 
-	        });    
+	        } );    
 
-        });
+        } );
 
-    }));
+    } ) 
+);

@@ -113,6 +113,8 @@ app.factory( 'posts', ['$http', 'auth', function ( $http, auth ) {
 			headers: {Authorization: 'Bearer ' + auth.getToken()}
 		} ).success( function ( data ) {
 				comment.upvotes -= 1;
+		} ).error( function( err ) {
+			console.log( err );
 		} );
 	}
 
@@ -166,7 +168,6 @@ app.factory( 'posts', ['$http', 'auth', function ( $http, auth ) {
 	};
 
 	auth.logOut = function () {
-		console.log(1);
 		$window.localStorage.removeItem( 'flapper-news-token' );
 	};
 
@@ -250,6 +251,7 @@ app.controller( 'MainCtrl', [
 	'auth',
 	function ( $scope, posts, auth ) {
 		$scope.posts = posts.posts;
+		console.log($scope.posts[0]);
 		$scope.isLoggedIn = auth.isLoggedIn;
 
 		$scope.addPost = function () {

@@ -12,6 +12,8 @@ require('./config/passport');
 var mongoose = require( 'mongoose' );
 require( './models/Posts' );
 require( './models/Comments' );
+require( './models/Upvotes' );
+require( './models/Downvotes' );
 
 mongoose.connect( 'mongodb://localhost/news' );
 

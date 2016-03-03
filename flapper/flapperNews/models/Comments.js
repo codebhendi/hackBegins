@@ -3,18 +3,9 @@ var mongoose = require( 'mongoose' );
 var commentSchema = new mongoose.Schema( {
 	body: String,
 	author: String,
-	upvotes: { type: Number, default: 0 },
+	upvotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Upvote' }],
+	downvotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Downvote' }],
 	post: { type: mongoose.Schema.Types.ObjectId, ref: 'Post' }	
 } );
-
-commentSchema.methods.upvote = function ( cb ) {
-	this.upvotes += 1;
-	this.save( cb );
-};
-
-commentSchema.methods.upvote = function ( cb ) {
-	this.upvotes--;
-	this.save( cb );
-};
 
 mongoose.model('Comment', commentSchema);

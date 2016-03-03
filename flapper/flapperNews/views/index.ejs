@@ -35,11 +35,6 @@
 				<h2>FlapperNews</h2>
 			</div>
 			<div class="post-body" ng-repeat="post in posts | orderBy : '-upvotes'">
-				<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)">
-				</span>
-				<span class="glyphicon glyphicon-thumbs-down" ng-click="decrementUpvotes(post)">
-				</span>
-				{{post.upvotes}}
 				<div class="post-title">
 					<a ng-show="post.link" href="{{post.link}}">
 						{{post.title}}
@@ -47,13 +42,17 @@
 					<span ng-hide="post.link">
 						{{post.title}}
 					</span>
-					<span ng-show="post.author">
-						{{post.author}}
-					</span>
+					{{post.author}}
 					<span>
-						<a href="#/posts/{{post._id}}">comments</a>
+						<a href="#/posts/{{post._id}}">{{post.comments.length}} comments</a>
 					</span>
 				</div>
+				<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(post)">
+				</span>
+				<span class="glyphicon glyphicon-thumbs-down" ng-click="decrementUpvotes(post)">
+				</span>
+				{{post.upvotes.length - post.downvotes.length}}
+				
 			</div>
 			<div ng-hide="isLoggedIn()">
 				<h3>You need to <a href="/#/login">log In</a> or <a href="/#/register">Register</a> before you can add a post</h3>
@@ -87,15 +86,17 @@
 				</div>
 			</div>
 			<div ng-repeat="comment in post.comments | orderBy: '-upvotes'">
+				<div class="comment body">
+					{{comment.body}}
+				</div>
+				 - by {{comment.author}}
 				<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvotes(comment)">
 				</span>
 				<span class="glyphicon glyphicon-thumbs-down" ng-click="decrementUpvotes(comment)">
 				</span>
-				{{comment.upvotes}} - by {{comment.author}}
+				{{comment.upvotes.length - comment.downvotes.length}}
 				
-				<div class="comment body">
-					{{comment.body}}
-				</div>
+				
 			</div>
 
 			<div ng-hide="isLoggedIn()">

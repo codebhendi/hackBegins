@@ -104,7 +104,7 @@ router.put( '/posts/:post/upvote', auth, function ( req, res, next ) {
 				}
 				// add the upvote to post
 				// then save the post.
-				req.post.upvotes.push( upvote);
+				req.post.upvotes++;
 				
 				req.post.save( function( err, post ) {
 					if ( err ) {
@@ -121,8 +121,8 @@ router.put( '/posts/:post/upvote', auth, function ( req, res, next ) {
 // Function to upvote a post
 // all implementaion same as dupvote.
 // use collection named downvotes to store
-// downvotes and "downvotes" are stored in
-// post.downvotes array of posts.
+// downvotes and decrease one upvote from
+// post.upvotes.
 router.put( '/posts/:post/downvote', auth, function ( req, res, next ) {
 	Downvote.findOne( 
 		{user: req.payload, post: req.post},
@@ -141,7 +141,7 @@ router.put( '/posts/:post/downvote', auth, function ( req, res, next ) {
 				if ( err ) {
 					return next( err );
 				}
-				req.post.downvotes.push( downvote);
+				req.post.upvotes--;
 				
 				req.post.save( function( err, post ) {
 					if ( err ) {
@@ -248,7 +248,7 @@ router.put( '/posts/:post/comments/:comment/upvote', auth, function ( req, res, 
 				if ( err ) {
 				return next( err );
 				}					
-				req.comment.upvotes.push( upvote );
+				req.comment.upvotes++;
 				
 				req.comment.save( function( err, comment ) {
 					if ( err ) {
@@ -286,7 +286,7 @@ router.put( '/posts/:post/comments/:comment/downvote', auth, function ( req, res
 				return next( err );
 				}
 
-				req.comment.downvotes.push( downvote );
+				req.comment.upvotes--;
 				
 				req.comment.save( function( err, comment ) {
 					if ( err ) {

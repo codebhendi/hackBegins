@@ -51,7 +51,7 @@
 				</span>
 				<span class="glyphicon glyphicon-thumbs-down" ng-click="decrementUpvotes(post)">
 				</span>
-				{{post.upvotes.length - post.downvotes.length}}
+				{{post.upvotes}}
 				
 			</div>
 			<div ng-hide="isLoggedIn()">
@@ -94,7 +94,7 @@
 				</span>
 				<span class="glyphicon glyphicon-thumbs-down" ng-click="decrementUpvotes(comment)">
 				</span>
-				{{comment.upvotes.length - comment.downvotes.length}}
+				{{comment.upvotes}}
 				
 				
 			</div>

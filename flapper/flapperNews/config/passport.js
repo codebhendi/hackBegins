@@ -48,7 +48,7 @@ passport.use( 'local-signup', new localStrategy(
 	                var user = new User();
 
 	                // set the user's local credentials
-	                user.username = email;
+	                user.username = username;
 	                user.setPassword( password );
 
 	                // save the user
